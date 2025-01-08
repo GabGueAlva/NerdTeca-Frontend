@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import Link from 'next/link';
@@ -8,8 +9,8 @@ import { cn } from '../../Lib/utils';
 import { useEffect, useState } from "react";
 
 interface CustomJwtPayload extends JwtPayload {
-  pro_nombre: string;
-  pro_apellido: string; // Agrega aquí cualquier otra propiedad específica que tengas en tu JWT
+  username: string;
+  id: number; // Agrega aquí cualquier otra propiedad específica que tengas en tu JWT
 }
 
 const UseHeader = () => {
@@ -19,13 +20,12 @@ const UseHeader = () => {
   const [promotorName, setPromotorName] = useState('');
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken'); // O sessionStorage si es el caso
+    const token = localStorage.getItem('authToken')
     if (token) {
       const decodedToken = jwtDecode<CustomJwtPayload>(token);
-      // Extrae nombre y apellido del payload
-      const nombre = decodedToken.pro_nombre; // Reemplaza 'nombre' por el campo correcto
-      const apellido = decodedToken.pro_apellido; // Reemplaza 'apellido' por el campo correcto
-      setPromotorName(`${nombre} ${apellido}`);
+      const nombre = decodedToken.username
+      console.log("nombre", nombre)
+      setPromotorName(nombre);
     }
   }, []);
 
@@ -47,13 +47,13 @@ const UseHeader = () => {
             className="flex flex-row space-x-3 items-center justify-center md:hidden"
           >
             <span className="h-7 w-7 bg-zinc-300 rounded-lg" />
-            <span className="font-bold text-xl flex ">IDARA</span>
+            <span className="font-bold text-xl flex ">NERDTECA</span>
           </Link>
         </div>
 
         <div className="hidden md:block">
-        <div className="flex items-center justify-center bg-zinc-300 p-2 rounded-full text-center">
-          <span className="font-semibold text-sm">{promotorName}</span>
+        <div className="flex items-center justify-center bg-[#091057] p-2 rounded-full text-center">
+          <span className="text-sm text-white">{promotorName}</span>
         </div>
         </div>
       </div>

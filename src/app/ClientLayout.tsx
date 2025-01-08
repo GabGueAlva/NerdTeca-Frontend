@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation";
 import UseHeader from "@/Components/Header/Header";
-// import HeaderMobile from "@/Components/Header/HeaderMobile";
-// import UseSideBar from "../Components/Sidebar/Sidebar";
+import HeaderMobile from "@/Components/Header/HeaderMobile";
+import UseSideBar from "../Components/Sidebar/Sidebar";
 import PageWrapper from "../Components/Pagewrap/Wrapper";
 import MarginWidthWrapper from "../Components/Pagewrap/MarginWrapper";
 
@@ -21,11 +21,11 @@ const ClientWrapper = ({ children }: { children: React.ReactNode }) => {
   // Estructura estándar para otras páginas
   return (
     <div className="flex">
-      {/* <UseSideBar /> */}
+      <UseSideBar />
       <main className="flex-1">
         <MarginWidthWrapper>
           <UseHeader />
-          {/* <HeaderMobile /> */}
+          <HeaderMobile />
           <PageWrapper>{children}</PageWrapper>
         </MarginWidthWrapper>
       </main>
