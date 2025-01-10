@@ -13,3 +13,14 @@ export interface Recurso {
     tipoRecurso: string;
     sede:string;
 }
+
+export interface Reserva {
+    id: Types.ObjectId | string;
+    estado: string;
+    fecha: string;
+    horaInicio:string;
+    horaFin:string;
+    recurso: Recurso;
+    usuario: Types.ObjectId | string;
+    sede: string
+}

@@ -23,8 +23,8 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icon icon="lucide:calendar-clock" width="24" height="24" />,
     submenu: true,
     subMenuItems: [
-      { title: 'Ver todos los clientes', path: '/moduloClientes' },
-      { title: 'Crear nuevo cliente', path: '/moduloClientes/crearCliente' },
+      { title: 'Gestionar reservas', path: '/reservas/GestionarReservas' },
+      { title: 'Mis reservas', path: '/reservas/MisReservas'},
     ],
   },
   {

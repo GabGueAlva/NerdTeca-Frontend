@@ -10,7 +10,7 @@ type FormData = {
     tipoRecurso: string;
     nombre: string;
     sede: string;
-    horarios: Array<{ dia: string; horaInicio: string ;horaFin: string }>;
+    horarios: Array<{ dia: string; horaInicio: string; horaFin: string }>;
 };
 
 type Horario = {
@@ -28,27 +28,27 @@ const recursoRegisterLogic = () => {
 
     useEffect(() => {
         const fetchSedes = async () => {
-          try {
-            const response = await fetch('http://localhost:3003/api/sedes');
-            if (!response.ok) {
-              throw new Error("Error al obtener las sedes");
+            try {
+                const response = await fetch('http://localhost:3003/api/sedes');
+                if (!response.ok) {
+                    throw new Error("Error al obtener las sedes");
+                }
+                const sedesData = await response.json();
+                setSedes(sedesData);
+            } catch (error) {
+                console.error("Error:", error);
             }
-            const sedesData = await response.json();
-            setSedes(sedesData);
-          } catch (error) {
-            console.error("Error:", error);
-          }
         };
-    
+
         fetchSedes();
     }, []);
 
     const onSubmit = async (data: FormData) => {
         const token = localStorage.getItem('authToken');
 
-        const dataToSend = { 
+        const dataToSend = {
             ...data,
-            horarios: horarios, 
+            horarios: horarios,
         };
         try {
             const response = await fetch('http://localhost:3003/api/recursos/registrar', {
@@ -74,13 +74,19 @@ const recursoRegisterLogic = () => {
 
     const addHorario = () => {
         setHorarios([...horarios, { dia: "", horaInicio: "", horaFin: "" }]);
-      };
-    
-      const handleHorarioChange = (index: number, field: 'dia' | 'horaInicio' | 'horaFin', value: string) => {
+    };
+
+    const handleHorarioChange = (index: number, field: 'dia' | 'horaInicio' | 'horaFin', value: string) => {
         const updatedHorarios = [...horarios];
+
+        if (field === 'horaFin' && value < updatedHorarios[index].horaInicio) {
+            toast.error("La hora final no puede ser anterior a la hora de inicio.");
+            return; 
+        }
+
         updatedHorarios[index][field] = value;
         setHorarios(updatedHorarios);
-      };
+    };
 
     return {
         register,

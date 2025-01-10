@@ -90,8 +90,8 @@ const loginLogic = () => {
           }
     
           const now = new Date().getTime();
-          const expirationTime = now + 2 * 60 * 60 * 1000; // 2 horas en milisegundos
-          const sessionEndTime = now + 5 * 60 * 60 * 1000; // 5 horas en milisegundos
+          const expirationTime = now + 50 * 60 * 1000; // 50 minutos en milisegundos
+          const sessionEndTime = now + 5 * 60 * 60 * 1000; 
     
           // Guardar el token, la hora de expiración por inactividad y la hora de expiración de sesión en localStorage
           localStorage.setItem('authToken', result.token);

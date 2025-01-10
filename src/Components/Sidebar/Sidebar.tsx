@@ -41,18 +41,20 @@ const UseSideBar = () => {
 
   const filterMenuItems = (item: SideNavItem) => {
     if (item.title === 'Recursos' && userRole !== 'Admin') {
-      return false; // Oculta 'Recursos' si el rol no es 'Admin'
+      return false; 
     }
-    return true; // Muestra el item si no hay restricciones
+    return true; 
   };
   
   const filterSubMenuItems = (subMenuItems: SideNavItem[] = []) => {
     return subMenuItems.filter(subItem => {
-      // Aquí puedes definir la lógica para mostrar u ocultar elementos
-      if (subItem.title === 'Perfiles' && userRole !== 'Admin') {
-        return false; // Oculta 'Perfiles' si el rol no es 'Admin'
+      if (subItem.title === 'Perfiles'  && userRole !== 'Admin') {
+        return false; 
       }
-      return true; // Muestra el subitem si no hay restricciones
+      if (subItem.title === 'Gestionar reservas'  && userRole !== 'Admin') {
+        return false; 
+      }
+      return true; 
     });
   };
 

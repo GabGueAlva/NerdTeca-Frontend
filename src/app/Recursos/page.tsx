@@ -13,7 +13,7 @@ import { Icon } from '@iconify/react';
 import UseEditarRecurso from "./EditarRecurso/page";
 
 interface Sede {
-  id: string;  // O `number` dependiendo del tipo del ID de las sedes en tu base de datos
+  id: string;  
   nombre: string;
 }
 
