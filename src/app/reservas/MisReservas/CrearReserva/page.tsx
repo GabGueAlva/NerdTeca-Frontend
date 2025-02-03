@@ -87,7 +87,7 @@ const UseRegisterReserva = () => {
           type="submit"
           className="w-full bg-[#091057] text-white font-medium py-2 rounded-md hover:bg-blue-700 transition"
         >
-          Reservar
+          Realizar Reserva
         </button>
       </div>
 
