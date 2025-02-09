@@ -99,7 +99,7 @@ const loginLogic = () => {
           localStorage.setItem('sessionEndTime', sessionEndTime.toString());
     
           toast.success('Inicio de sesión exitoso'); // Mostrar notificación de éxito
-          router.push('/inicio');
+          router.push('/Recursos');
         } catch (error) {
           console.error('Error:', error);
           toast.error('El correo electrónico o la contraseña son incorrectos o no coinciden.');

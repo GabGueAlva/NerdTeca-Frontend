@@ -11,6 +11,7 @@ type FormData = {
     nombre: string;
     sede: string;
     horarios: Array<{ dia: string; horaInicio: string; horaFin: string }>;
+    imagen: File | null;
 };
 
 type Horario = {
@@ -23,8 +24,9 @@ const recursoRegisterLogic = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
 
-    const [sedes, setSedes] = useState<{ id: string, nombre: string }[]>([]);
-    const [horarios, setHorarios] = useState<{ dia: string; horaInicio: string; horaFin: string }[]>([]);
+    const [sedes, setSedes] = useState<{ id: string, nombre: string }[]>([])
+    const [horarios, setHorarios] = useState<{ dia: string; horaInicio: string; horaFin: string }[]>([])
+    const [imagen, setImagen] = useState<File | null>(null)
 
     useEffect(() => {
         const fetchSedes = async () => {
@@ -46,18 +48,19 @@ const recursoRegisterLogic = () => {
     const onSubmit = async (data: FormData) => {
         const token = localStorage.getItem('authToken');
 
-        const dataToSend = {
-            ...data,
-            horarios: horarios,
-        };
+        const formData = new FormData();
+        formData.append("tipoRecurso", data.tipoRecurso);
+        formData.append("nombre", data.nombre);
+        formData.append("sede", data.sede);
+        formData.append("horarios", JSON.stringify(horarios));
+        if (imagen) formData.append('imagen', imagen);
         try {
             const response = await fetch('http://localhost:3003/api/recursos/registrar', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(dataToSend),
+                body: formData
             });
             if (!response.ok) {
                 throw new Error('Error al crear el nuevo recurso')
@@ -97,6 +100,7 @@ const recursoRegisterLogic = () => {
         horarios,
         addHorario,
         handleHorarioChange,
+        setImagen 
     }
 
 }

@@ -22,6 +22,7 @@ type Recurso = {
   nombre: string;
   sede: string;
   horarios: Array<{ dia: string; horaInicio: string; horaFin: string }>;
+  imagen: string;
 };
 
 
@@ -32,7 +33,7 @@ const reservaRegisterLogic = () => {
   const [recursos, setRecursos] = useState<Recurso[]>([]);
   const [recursosDisponibles, setRecursosDisponibles] = useState<Recurso[]>([]);
   const [horariosDisponibles, setHorariosDisponibles] = useState<Array<{ dia: string; horaInicio: string; horaFin: string }>>([]);
-  const [recursoSeleccionado, setRecursoSeleccionado] = useState<string | null>(null);
+  const [recursoSeleccionado, setRecursoSeleccionado] = useState<Recurso | null>(null);
   const [horarioSeleccionado, setHorarioSeleccionado] = useState<string | null>(null);
   const fechaSeleccionada = watch("fecha")
 
@@ -75,23 +76,10 @@ const reservaRegisterLogic = () => {
               const estadoValido =
                 reserva.estado === "Reservado" || reserva.estado === "En uso" || reserva.estado === "Finalizado";
 
-              console.log(`    ➡️ Comparando con reserva:`);
-              console.log(`      - Recurso de la reserva ID: ${recursoReservaID}`);
-              console.log(`      - Fecha de la reserva: ${reserva.fecha}`);
-              console.log(`      - Horario de la reserva: ${reserva.horaInicio} - ${reserva.horaFin}`);
-              console.log(`      - Estado de la reserva: ${reserva.estado}`);
-              console.log(`      🔍 Comparaciones:`);
-              console.log(`        - Mismo recurso: ${mismoRecurso}`);
-              console.log(`        - Misma fecha: ${mismaFecha}`);
-              console.log(`        - Horario se solapa: ${horarioSeSolapa}`);
-              console.log(`        - Estado válido: ${estadoValido}`);
-
               // Aquí queremos que 'reservasEnHorario' sea 'true' si hay una reserva que ocupe ese horario, no al revés
               return mismoRecurso && mismaFecha && horarioSeSolapa && estadoValido;
             });
 
-            console.log(`  🔍 Resultado para horario:`);
-            console.log(`    - Reservas en conflicto: ${reservasEnHorario}`);
             // Si hay reservas en conflicto, no lo incluimos
             return !reservasEnHorario;
           });
@@ -118,7 +106,7 @@ const reservaRegisterLogic = () => {
   const handleRecursoChange = (recursoNombre: string) => {
     const recurso = recursosDisponibles.find((r) => r.nombre === recursoNombre);
     if (recurso) {
-      setRecursoSeleccionado(recurso.id.toString());
+      setRecursoSeleccionado(recurso || null);
       setHorariosDisponibles(recurso.horarios); // Aquí asignamos los horarios filtrados
 
       // Limpiar campos de hora
@@ -177,7 +165,8 @@ const reservaRegisterLogic = () => {
     horariosDisponibles,
     horarioSeleccionado,
     handleRecursoChange,
-    handleHorarioSeleccionado
+    handleHorarioSeleccionado,
+    recursoSeleccionado
   }
 
 }

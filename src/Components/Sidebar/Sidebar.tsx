@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation';
 import { jwtDecode, JwtPayload } from "jwt-decode";
 
 interface CustomJwtPayload extends JwtPayload {
-  rol: string; // Agrega aquí cualquier otra propiedad específica que tengas en tu JWT
+  rol: string; 
 }
 
 const UseSideBar = () => {

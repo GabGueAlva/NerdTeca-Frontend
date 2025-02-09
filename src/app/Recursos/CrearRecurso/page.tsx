@@ -17,6 +17,7 @@ const UseRegisterRecurso = () => {
     horarios,
     addHorario,
     handleHorarioChange,
+    setImagen
   } = recursoRegisterLogic();
 
   return (
@@ -25,6 +26,16 @@ const UseRegisterRecurso = () => {
       <div className="flex items-center gap-3 bg-[#091057] text-white p-4 rounded-md w-full max-w-lg">
         <Icon icon="mdi:clipboard-plus-outline" className="text-3xl" />
         <h2 className="text-xl font-bold">Registrar Nuevo Recurso</h2>
+      </div>
+
+      <div className="flex flex-col">
+        <label className="text-gray-700">Sube una imagen del recurso</label>
+        <input
+          type="file"
+          accept="image/*"
+          className="border border-gray-300 rounded-md p-2"
+          onChange={(e) => setImagen(e.target.files ? e.target.files[0] : null)}
+        />
       </div>
   
       {/* Form Fields */}
@@ -82,6 +93,8 @@ const UseRegisterRecurso = () => {
             <span className="text-red-600 text-sm">Este campo es obligatorio</span>
           )}
         </div>
+
+
   
         {/* Horarios */}
         <div className="w-full max-w-lg flex flex-col gap-3">

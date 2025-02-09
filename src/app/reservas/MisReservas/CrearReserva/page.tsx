@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
@@ -17,6 +19,7 @@ const UseRegisterReserva = () => {
     horarioSeleccionado,
     handleRecursoChange,
     handleHorarioSeleccionado,
+    recursoSeleccionado
   } = reservaRegisterLogic();
 
   return (
@@ -51,10 +54,19 @@ const UseRegisterReserva = () => {
             <option value="">Seleccione un recurso</option>
             {recursosDisponibles.map((recurso) => (
               <option key={recurso.id.toString()} value={recurso.nombre}>
-                {recurso.tipoRecurso} - {recurso.nombre}
+                {recurso.tipoRecurso} - {recurso.nombre} 
               </option>
             ))}
           </select>
+          {recursoSeleccionado && recursoSeleccionado.imagen && (
+            <div className="flex justify-center mt-4">
+              <img
+                src={`http://localhost:3003${recursoSeleccionado.imagen}`}
+                alt={recursoSeleccionado.nombre}
+                className="w-64 h-40 object-cover rounded-md shadow-md"
+              />
+            </div>
+          )}
         </div>
 
         {/* Horarios Disponibles */}

@@ -4,11 +4,6 @@ import { SideNavItem } from './types';
 
 export const SIDENAV_ITEMS: SideNavItem[] = [
   {
-    title: 'Inicio',
-    path: '/inicio',
-    icon: <Icon icon="lucide:home" width="24" height="24" />,
-  },
-  {
     title: 'Recursos',
     path: '/recursos',
     icon: <Icon icon="lucide:monitor-smartphone" width="24" height="24" />,
